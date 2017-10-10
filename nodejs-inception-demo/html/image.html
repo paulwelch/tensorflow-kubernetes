@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Inception</title>
+      <meta charset="utf-8">
+		<link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+		 <h1>Inception Image Classification Demo</h1>
+		 <h3><p id="imageCategories">Enter an image URL and click the button</p></h3>
+     <button onclick="buttonClicked()">Get Image</button>
+     <input id="imageUrl" type="text" size="60" value="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"/>
+     <br/><br/>
+     <img id="image" src="" width="50%" />
+		 <script src="socket.io/socket.io.js"></script>
+		 <script>
+			 var socket = io.connect(window.location.origin, {path: '/inception/engine.io'});
+
+			 function buttonClicked() {
+         document.getElementById("imageCategories").innerHTML = 'I think the image is a ...';
+         url = document.getElementById("imageUrl").value;
+         document.getElementById("image").src = url;
+			   socket.emit('process', { imageUrl: url });
+			 }
+
+			 socket.on('results', function(data) {
+				 document.getElementById("imageCategories").innerHTML = 'I think the image is a ' + data;
+			 });
+		</script>
+   </body>
+</html>

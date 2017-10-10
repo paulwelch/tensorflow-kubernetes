@@ -1,0 +1,14 @@
+h1 {font-size: 2em; margin: 0.67em 0; color: blue}
+h2 {font-size: 1.5em; margin: 0.67em 0;}
+h3 {font-size: 1em; margin: 0.67em 0;}
+html,
+body {
+  font-family: "ff-meta-web-pro", sans-serif;
+  text-rendering: optimizeLegibility;
+  font-size: 100%;
+  line-height: 26px;
+  background: #f6efe5;
+  background-size: 60%;
+  color: #0d2c40;
+}
+button,input,select,textarea {font-family: inherit;font-size: 100%;margin: 0;}

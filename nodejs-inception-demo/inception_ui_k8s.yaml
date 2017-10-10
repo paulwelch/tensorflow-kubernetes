@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: inception-ui-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: inception-ui
+    spec:
+      containers:
+      - name: inception-ui
+        image: index.docker.io/paulwelch/image-classifier-ui
+        command:
+        - /bin/sh
+        - -c
+        args:
+        - npm start
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: inception-ui
+  name: inception-ui
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: inception-ui
+  type: NodePort
