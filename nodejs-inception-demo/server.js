@@ -4,6 +4,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server, {path: '/inception/engine.io'});
 var request = require('request');
 var grpc = require('grpc');
+var util = require('util');
 var tensorflow_serving = grpc.load('proto/prediction_service.proto').tensorflow.serving;
 var client = new tensorflow_serving.PredictionService(
   "inception-service:9000", grpc.credentials.createInsecure()
@@ -59,6 +60,8 @@ function classify(imageUrl) {
       client.predict(msg, (err, response) => {
         if (err) console.log(err);
 
+        console.log("Response: " + util.inspect(response, false, null))
+
         var classes = response.outputs.classes.string_val.map((b) => b.toString('utf8'));
 
         var i,
@@ -69,9 +72,13 @@ function classify(imageUrl) {
           results.push(classes.slice(i, i+chunk));
         }
 
+        var scores = response.outputs.scores.float_val;
+
         console.log("Results: " + results.toString())
-        var firstResult = String(results).substr(0, String(results).indexOf(','));
-        io.emit('results', firstResult);
+        console.log("Scores: " + scores);
+        //var firstResult = String(results).substr(0, //String(results).indexOf(','));
+        //io.emit('results', {firstResult);
+        io.emit('results', {classes, scores});
       });
 
     }
