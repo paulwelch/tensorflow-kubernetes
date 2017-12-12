@@ -1,31 +1,95 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Inception</title>
-      <meta charset="utf-8">
-		<link rel="stylesheet" href="styles.css">
-   </head>
-   <body>
-		 <h1>Inception Image Classification Demo</h1>
-		 <h3><p id="imageCategories">Enter an image URL and click the button</p></h3>
-     <button onclick="buttonClicked()">Get Image</button>
-     <input id="imageUrl" type="text" size="60" value="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"/>
-     <br/><br/>
-     <img id="image" src="" width="50%" />
-		 <script src="socket.io/socket.io.js"></script>
-		 <script>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Inception</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Inception Image Classification Demo</h1>
+    <h3>
+      <p id="instructions">Enter an image URL and click the Classify button</p>
+    </h3>
+    <button onclick="buttonClicked()">Classify</button> <input id="imageUrl" size="60"
+      value="https://raw.githubusercontent.com/paulwelch/tensorflow-kubernetes/master/nodejs-inception-demo/html/images/my_cat.jpg"
+      type="text">
+    <br>
+    <br>
+    <div class="results">
+      <div class="row">
+        <div class="guess">
+          <h3>
+            <p id="guess"></p>
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col1" id="col1">
+          <img class="image" id="image" src="">
+        </div>
+        <div class="col2" id="col2">
+          <table>
+            <tbody>
+              <tr>
+                <td id="results-table" class="title"></td>
+              </tr>
+              <tr id="top1">
+                <td class="category" id="top1-category"></td>
+                <td class="percent" id="top1-percent"></td>
+              </tr>
+              <tr id="top2">
+                <td class="category" id="top2-category"></td>
+                <td class="percent" id="top2-percent"></td>
+              </tr>
+              <tr id="top3">
+                <td class="category" id="top3-category"></td>
+                <td iclass="percent" id="top3-percent"></td>
+              </tr>
+              <tr id="top4">
+                <td class="category" id="top4-category"></td>
+                <td class="percent" id="top4-percent"></td>
+              </tr>
+              <tr id="top5">
+                <td class="category" id="top5-category"></td>
+                <td class="percent" id="top5-percent"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
 			 var socket = io.connect(window.location.origin, {path: '/inception/engine.io'});
 
 			 function buttonClicked() {
-         document.getElementById("imageCategories").innerHTML = 'I think the image is a ...';
+         document.getElementById("guess").innerHTML = 'I think the image is a ...';
          url = document.getElementById("imageUrl").value;
          document.getElementById("image").src = url;
 			   socket.emit('process', { imageUrl: url });
 			 }
 
 			 socket.on('results', function(data) {
-				 document.getElementById("imageCategories").innerHTML = 'I think the image is a ' + data;
+				 document.getElementById("guess").innerHTML = 'I think the image is a ' + data.classes[0].split(',')[0];
+
+         document.getElementById("results-table").innerHTML = "All Guesses";
+
+         document.getElementById("top1-category").innerHTML = data.classes[0];
+         document.getElementById("top1-percent").innerHTML = (100 - data.scores[0])/100;
+
+         document.getElementById("top2-category").innerHTML = data.classes[1];
+         document.getElementById("top2-percent").innerHTML = (100 - data.scores[1])/100;
+
+         document.getElementById("top3-category").innerHTML = data.classes[2];
+         document.getElementById("top3-percent").innerHTML = (100 - data.scores[2])/100;
+
+         document.getElementById("top4-category").innerHTML = data.classes[3];
+         document.getElementById("top4-percent").innerHTML = (100 - data.scores[3])/100;
+
+         document.getElementById("top5-category").innerHTML = data.classes[4];
+         document.getElementById("top5-percent").innerHTML = (100 - data.scores[4])/100;
+
 			 });
 		</script>
-   </body>
+  </body>
 </html>
