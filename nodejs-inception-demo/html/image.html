@@ -34,24 +34,24 @@
                 <td id="results-table" class="title"></td>
               </tr>
               <tr id="top1">
-                <td class="category" id="top1-category"></td>
-                <td class="percent" id="top1-percent"></td>
+                <td id="top1-category"></td>
+                <td id="top1-percent"></td>
               </tr>
               <tr id="top2">
-                <td class="category" id="top2-category"></td>
-                <td class="percent" id="top2-percent"></td>
+                <td id="top2-category"></td>
+                <td id="top2-percent"></td>
               </tr>
               <tr id="top3">
-                <td class="category" id="top3-category"></td>
-                <td iclass="percent" id="top3-percent"></td>
+                <td id="top3-category"></td>
+                <td id="top3-percent"></td>
               </tr>
               <tr id="top4">
-                <td class="category" id="top4-category"></td>
-                <td class="percent" id="top4-percent"></td>
+                <td id="top4-category"></td>
+                <td id="top4-percent"></td>
               </tr>
               <tr id="top5">
-                <td class="category" id="top5-category"></td>
-                <td class="percent" id="top5-percent"></td>
+                <td id="top5-category"></td>
+                <td id="top5-percent"></td>
               </tr>
             </tbody>
           </table>
@@ -74,20 +74,30 @@
 
          document.getElementById("results-table").innerHTML = "All Guesses";
 
-         document.getElementById("top1-category").innerHTML = data.classes[0];
-         document.getElementById("top1-percent").innerHTML = (100 - data.scores[0])/100;
+         document.getElementById("top1-category").innerHTML = data.classes[0].trim();
+         document.getElementById("top1-category").className = "category";
+         document.getElementById("top1-percent").innerHTML = "(Score = " + (data.percents[0]*100).toFixed(1) + "%)";
+         document.getElementById("top1-percent").className = "percent";
 
-         document.getElementById("top2-category").innerHTML = data.classes[1];
-         document.getElementById("top2-percent").innerHTML = (100 - data.scores[1])/100;
+         document.getElementById("top2-category").innerHTML = data.classes[1].trim();
+         document.getElementById("top2-category").className = "category";
+         document.getElementById("top2-percent").innerHTML = "(Score = " + (data.percents[1]*100).toFixed(1) + "%)";
+         document.getElementById("top2-percent").className = "percent";
 
-         document.getElementById("top3-category").innerHTML = data.classes[2];
-         document.getElementById("top3-percent").innerHTML = (100 - data.scores[2])/100;
+         document.getElementById("top3-category").innerHTML = data.classes[2].trim();
+         document.getElementById("top3-category").className = "category";
+         document.getElementById("top3-percent").innerHTML = "(Score = " + (data.percents[2]*100).toFixed(1) + "%)";
+         document.getElementById("top3-percent").className = "percent";
 
-         document.getElementById("top4-category").innerHTML = data.classes[3];
-         document.getElementById("top4-percent").innerHTML = (100 - data.scores[3])/100;
+         document.getElementById("top4-category").innerHTML = data.classes[3].trim();
+         document.getElementById("top4-category").className = "category";
+         document.getElementById("top4-percent").innerHTML = "(Score = " + (data.percents[3]*100).toFixed(1) + "%)";
+         document.getElementById("top4-percent").className = "percent";
 
-         document.getElementById("top5-category").innerHTML = data.classes[4];
-         document.getElementById("top5-percent").innerHTML = (100 - data.scores[4])/100;
+         document.getElementById("top5-category").innerHTML = data.classes[4].trim();
+         document.getElementById("top5-category").className = "category";
+         document.getElementById("top5-percent").innerHTML = "(Score = " + (data.percents[4]*100).toFixed(1) + "%)";
+         document.getElementById("top5-percent").className = "percent";
 
 			 });
 		</script>

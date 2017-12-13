@@ -10,10 +10,8 @@ body {
   background-size: 60%;
 }
 button,input,select,textarea {font-family: inherit;font-size: 100%;margin: 0;}
+table {border-collapse: collapse;}
 
-table {
-  width: 75%;
-}
 .col1 {
   float: left;
   margin-left: 20px;
@@ -22,14 +20,24 @@ table {
 .col2 {
   float: left;
   margin-left: 20px;
-  width: 70%;
+  width: 550px;
 }
 .title {
+  width: 100%;
   font-weight: bold;
 }
 .image {
-  width: 125px;
+  width: 175px;
+  margin-top: 28px;
 }
 .guess {
-  width: 250px;
+  width: 100%;
+}
+.category {
+  border: 1px solid grey;
+  white-space: nowrap;
+}
+.percent {
+  border: 1px solid grey;
+  white-space: nowrap;
 }
