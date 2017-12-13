@@ -5,6 +5,7 @@ var io = require('socket.io')(server, {path: '/inception/engine.io'});
 var request = require('request');
 var grpc = require('grpc');
 var util = require('util');
+var softmax = require('softmax-fn');
 var tensorflow_serving = grpc.load('proto/prediction_service.proto').tensorflow.serving;
 var client = new tensorflow_serving.PredictionService(
   "inception-service:9000", grpc.credentials.createInsecure()
@@ -73,12 +74,12 @@ function classify(imageUrl) {
         }
 
         var scores = response.outputs.scores.float_val;
+        var percents = softmax(scores);
 
-        console.log("Results: " + results.toString())
-        console.log("Scores: " + scores);
-        //var firstResult = String(results).substr(0, //String(results).indexOf(','));
-        //io.emit('results', {firstResult);
-        io.emit('results', {classes, scores});
+        console.log("Results: " + results.toString());
+        console.log("Scores: " + percents);
+
+        io.emit('results', {classes, percents});
       });
 
     }
