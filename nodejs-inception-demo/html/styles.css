@@ -1,6 +1,5 @@
-h1 {font-size: 1.5em; margin: 0.67em 0; color: blue}
-h2 {font-size: 1.25em; margin: 0.67em 0;}
-h3 {font-size: 1em; margin: 0.67em 0;}
+h1 {font-size: 1.5em; margin-top: 0.67em 0; margin-bottom: 0.67em 0; color: blue;}
+h2 {font-size: 1.0em; margin-top: 0.67em 0; margin-bottom: 0.67em 0;}
 html,
 body {
   font-family: "ff-meta-web-pro", sans-serif;
@@ -8,6 +7,7 @@ body {
   font-size: 100%;
   line-height: 26px;
   background-size: 60%;
+  margin-left: 20px;
 }
 button,input,select,textarea {font-family: inherit;font-size: 100%;margin: 0;}
 table {border-collapse: collapse;}
@@ -32,6 +32,7 @@ table {border-collapse: collapse;}
 }
 .guess {
   width: 100%;
+  margin-left: 20px;
 }
 .category {
   border: 1px solid grey;
