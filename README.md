@@ -35,7 +35,7 @@ Utilities and demos of tensorflow machine learning running on Kubernetes.
 
 Created and maintained by [Paul Welch](https://github.com/paulwelch)
 
-Testing image ![](https://raw.githubusercontent.com/paulwelch/tensorflow-kubernetes/master/nodejs-inception-demo/html/images/my_cat.jpg){:style="border: 10px solid black"}
+Testing image ![(https://raw.githubusercontent.com/paulwelch/tensorflow-kubernetes/master/nodejs-inception-demo/html/images/my_cat.jpg){:style="border: 10px solid black"}]
 
 
 # License
